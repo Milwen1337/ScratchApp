@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.milwen.navigation.business.FeatureNavigation
+import com.milwen.scratch.navigation.scratch.ScratchDestination
+import com.milwen.scratch.navigation.scratch.ScratchNavigation
 
 @Composable
 fun AppNavGraph(
@@ -14,15 +16,12 @@ fun AppNavGraph(
 ) {
 
     val featuresNavigation: List<FeatureNavigation> = listOf(
-        MainNavigation(),
-        ChatNavigation(onNavigationClick),
-        DashboardNavigation(onNavigationClick),
-        SignNavigation(onApplicationClose)
+        ScratchNavigation(onApplicationClose),
     )
 
     NavHost(
         navController = navController,
-        startDestination = MainDestination.SplashScreen.route,
+        startDestination = ScratchDestination.CardMain.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None }
     ) {
