@@ -1,6 +1,7 @@
 package com.milwen.scratch.presentation
 
 import android.app.Application
+import com.milwen.restapi.di.restModule
 import com.milwen.scratch.di.mainModule
 import com.milwen.scratch.di.scratchModule
 import org.koin.android.ext.koin.androidContext
@@ -15,6 +16,7 @@ class MainApplication : Application() {
             modules(
                 listOf(
                     mainModule,
+                    restModule,
                     scratchModule,
                 )
             )
