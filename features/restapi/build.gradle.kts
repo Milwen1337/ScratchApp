@@ -41,8 +41,6 @@ android {
 
 dependencies {
 
-    //implementation(projects.libraries.datastore)
-
     implementation(libs.kotlinx.coroutines.core)
 
     implementation(platform(libs.okhttp.bom))
