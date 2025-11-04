@@ -1,3 +1,4 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
         google {
@@ -21,4 +22,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Scratch"
 include(":app")
- 
+
+include(":features:scratch")
+include(":features:navigation")
+include(":features:baseline")
+include(":features:restapi")
