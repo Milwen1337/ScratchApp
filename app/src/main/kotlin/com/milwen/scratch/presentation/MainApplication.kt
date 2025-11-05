@@ -1,6 +1,7 @@
 package com.milwen.scratch.presentation
 
 import android.app.Application
+import com.milwen.database.di.databaseModule
 import com.milwen.restapi.di.restModule
 import com.milwen.scratch.di.mainModule
 import com.milwen.scratch.di.scratchModule
@@ -18,6 +19,7 @@ class MainApplication : Application() {
                     mainModule,
                     restModule,
                     scratchModule,
+                    databaseModule,
                 )
             )
         }

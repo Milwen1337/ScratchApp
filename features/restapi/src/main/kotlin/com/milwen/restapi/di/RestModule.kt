@@ -1,9 +1,12 @@
 package com.milwen.restapi.di
 
 import com.milwen.restapi.data.Config
+import com.milwen.restapi.data.repository.ActivationRepositoryImpl
 import com.milwen.restapi.data.service.ActivationService
+import com.milwen.scratch.domain.ActivationRepository
 import com.milwen.scratch.restapi.BuildConfig
 import com.squareup.moshi.Moshi
+import kotlinx.coroutines.CoroutineScope
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -37,5 +40,11 @@ val restModule = module {
     }
     single<ActivationService> {
         get<Retrofit>().create(ActivationService::class.java)
+    }
+    single<ActivationRepository> {
+        ActivationRepositoryImpl(
+            appScope = get<CoroutineScope>(),
+            scratchCardDao = get()
+        )
     }
 }

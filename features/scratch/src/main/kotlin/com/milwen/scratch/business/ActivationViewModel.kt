@@ -3,50 +3,46 @@ package com.milwen.scratch.business
 import androidx.lifecycle.viewModelScope
 import com.milwen.baseline.business.BaseViewModel
 import com.milwen.baseline.business.ScreenState
-import com.milwen.restapi.domain.ActivationRepository
+import com.milwen.scratch.data.ScratchCard
+import com.milwen.scratch.domain.ActivationRepository
 import kotlinx.coroutines.launch
-import java.util.UUID
 
 class ActivationViewModel(
     val activationRepository: ActivationRepository
 ): BaseViewModel<ActivationViewModel.State>(State()) {
 
-    fun generateCode() {
+    init {
         viewModelScope.launch {
-            state = state.copy(
-                revealedCode = UUID.randomUUID().toString()
-            )
-        }
-    }
-
-    fun activateCard() {
-        val code = state.revealedCode ?: return
-
-        viewModelScope.launch {
-            state = state.copy(
-                screenState = ScreenState.Loading("Loading")
-            )
-            val newCode = activationRepository.activate(code)
-
-            if (newCode == null) {
-                // show error
-            } else {
+            activationRepository.observeScratchCard().collect { card ->
                 state = state.copy(
-                    scratchState = newCode.toCardState()
+                    scratchCard = card,
+                    canActivate = card.status is ScratchState.Scratched
                 )
             }
         }
     }
 
-    fun Int.toCardState(): ScratchState? = if (this > SCRATCH_CODE_VALID) ScratchState.ACTIVATED else state.scratchState
+    fun activateCard() = viewModelScope.launch {
+        val code = (state.scratchCard.status as? ScratchState.Scratched)?.revealCode
+        if (code.isNullOrBlank()) {
+            state = state.copy(screenState = ScreenState.Error("Please scratch the card first."))
+            return@launch
+        }
+
+        state = state.copy(screenState = ScreenState.Loading("Activating…"))
+
+        runCatching { activationRepository.activate(code) }
+            .onSuccess {
+                state = state.copy(screenState = null)
+            }
+            .onFailure { e ->
+                state = state.copy(screenState = ScreenState.Error(e.message ?: "Activation failed"))
+            }
+    }
 
     data class State(
-        val screenState: ScreenState = ScreenState.Loading("Loading"),
-        val scratchState: ScratchState? = null,
-        val revealedCode: String? = null,
+        val screenState: ScreenState? = ScreenState.Loading("Loading"),
+        val scratchCard: ScratchCard = ScratchCard(ScratchState.Unscratched),
+        val canActivate: Boolean = false,
     ) : BaseState
-
-    companion object {
-        private const val SCRATCH_CODE_VALID = 277028
-    }
 }

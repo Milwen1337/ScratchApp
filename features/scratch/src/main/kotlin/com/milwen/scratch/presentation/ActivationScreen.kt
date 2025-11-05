@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.milwen.baseline.business.ScreenState
 import com.milwen.baseline.presentation.BaseAppBar
 import com.milwen.baseline.presentation.BaseScreen
+import com.milwen.baseline.presentation.PrimaryButton
 import com.milwen.scratch.business.ActivationViewModel
 import com.milwen.scratch.business.ScratchState
 import org.koin.androidx.compose.koinViewModel
@@ -53,6 +54,12 @@ fun ActivationScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
 
+                PrimaryButton(
+                    text = "Activate",
+                    onClick = {
+                        
+                    }
+                )
             }
         }
     )

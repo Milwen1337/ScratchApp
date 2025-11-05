@@ -3,24 +3,21 @@ package com.milwen.scratch.business
 import androidx.lifecycle.viewModelScope
 import com.milwen.baseline.business.BaseViewModel
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class ScratchViewModel(
 
 ): BaseViewModel<ScratchViewModel.State>(State()) {
 
-    init {
-        loadData()
-    }
-
-    fun loadData() {
+    fun generateCode() {
         viewModelScope.launch {
             state = state.copy(
-                exampleValue = true
+                revealedCode = UUID.randomUUID().toString()
             )
         }
     }
 
     data class State(
-        val exampleValue: Boolean = false,
+        val revealedCode: String? = null,
     ) : BaseState
 }

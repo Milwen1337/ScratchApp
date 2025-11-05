@@ -44,6 +44,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.features.database)
+    implementation(projects.features.scratch)
 
     implementation(libs.kotlinx.coroutines.core)
 

@@ -63,6 +63,7 @@ dependencies {
     implementation(projects.features.navigation)
     implementation(projects.features.restapi)
     implementation(projects.features.scratch)
+    implementation(projects.features.database)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -36,7 +36,6 @@ android {
 dependencies {
     implementation(projects.features.baseline)
     implementation(projects.features.navigation)
-    implementation(projects.features.restapi)
 
     implementation(libs.androidx.core.ktx)
 
