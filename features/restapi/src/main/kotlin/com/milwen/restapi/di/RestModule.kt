@@ -6,7 +6,6 @@ import com.milwen.restapi.data.service.ActivationService
 import com.milwen.scratch.domain.ActivationRepository
 import com.milwen.scratch.restapi.BuildConfig
 import com.squareup.moshi.Moshi
-import kotlinx.coroutines.CoroutineScope
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -16,7 +15,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 val restModule = module {
-    single { Moshi.Builder().build() }
+    single {
+        Moshi.Builder()
+            .build()
+    }
     single {
         HttpLoggingInterceptor().apply {
             level = if(BuildConfig.DEBUG)
