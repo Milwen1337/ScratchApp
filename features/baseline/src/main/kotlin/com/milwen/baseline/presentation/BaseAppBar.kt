@@ -9,6 +9,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -20,10 +21,12 @@ fun BaseAppBar(
 ) {
     TopAppBar(
         title = {
-            Text(text = title, style = MaterialTheme.typography.titleSmall)
+            Text(
+                text = title,
+                color = White,
+                style = MaterialTheme.typography.titleMedium
+            )
         },
-        modifier = Modifier
-            .fillMaxWidth(),
         navigationIcon = {
             if(backButtonAction != null) {
                 IconButton(onClick = { backButtonAction() }) {
@@ -33,6 +36,12 @@ fun BaseAppBar(
                     )
                 }
             }
-        }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = BeyondBlue,
+            titleContentColor = White,
+            navigationIconContentColor = White
+        ),
+        modifier = Modifier.fillMaxWidth()
     )
 }

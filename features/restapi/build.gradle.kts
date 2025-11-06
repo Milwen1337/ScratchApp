@@ -19,6 +19,10 @@ android {
         release {
             buildConfigField("String", "API_URL", "\"https://api.o2.sk/\"")
         }
+
+        debug {
+            buildConfigField("String", "API_URL", "\"https://api.o2.sk/\"")
+        }
     }
 
     compileOptions {
@@ -40,6 +44,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.features.database)
+    implementation(projects.features.scratch)
 
     implementation(libs.kotlinx.coroutines.core)
 

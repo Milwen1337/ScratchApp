@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
-    alias(libs.plugins.google.services)
 }
 
 android {
@@ -64,6 +63,8 @@ dependencies {
     implementation(projects.features.navigation)
     implementation(projects.features.restapi)
     implementation(projects.features.scratch)
+    implementation(projects.features.database)
+    implementation(projects.features.usecase)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
