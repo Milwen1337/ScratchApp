@@ -57,14 +57,10 @@ fun ActivationScreen(
         state = uiState.value.screenState,
         snackbar = snackBar.value,
         topBar = {
-            Column(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                BaseAppBar(
-                    title = "Card Activation",
-                    backButtonAction = onBackClick,
-                )
-            }
+            BaseAppBar(
+                title = "Card Activation",
+                backButtonAction = onBackClick,
+            )
         },
         content = {
             Column(

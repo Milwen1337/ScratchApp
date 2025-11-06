@@ -114,7 +114,9 @@ fun BaseScreen(
 fun LoadingScreen(state: ScreenState?) {
     if(state is ScreenState.Loading) {
         Column(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
@@ -129,7 +131,9 @@ fun LoadingScreen(state: ScreenState?) {
 fun ErrorScreen(state: ScreenState?) {
     if(state is ScreenState.Error) {
         Column(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
@@ -142,7 +146,9 @@ fun ErrorScreen(state: ScreenState?) {
 fun NoInternetScreen(state: ScreenState?) {
     if(state is ScreenState.NoInternet) {
         Column(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ){

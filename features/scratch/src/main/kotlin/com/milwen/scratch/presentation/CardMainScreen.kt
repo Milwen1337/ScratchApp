@@ -54,13 +54,9 @@ fun CardMainScreen(
     BaseScreen(
         state = uiState.value.screenState,
         topBar = {
-            Column(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                BaseAppBar(
-                    title = "Card",
-                )
-            }
+            BaseAppBar(
+                title = "Card",
+            )
         },
         content = {
             Column(

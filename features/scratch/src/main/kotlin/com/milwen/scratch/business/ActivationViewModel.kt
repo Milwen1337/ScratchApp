@@ -20,6 +20,7 @@ class ActivationViewModel(
         viewModelScope.launch {
             scratchCardObserveUseCase().collect { card ->
                 state = state.copy(
+                    screenState = null,
                     scratchCard = card,
                     canActivate = card.status is ScratchState.Scratched
                 )

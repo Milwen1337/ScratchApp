@@ -18,6 +18,7 @@ class ScratchViewModel(
         viewModelScope.launch {
             scratchCardObserveUseCase().collect { card ->
                 state = state.copy(
+                    screenState = null,
                     scratchCard = card,
                     canScratch = card.status is ScratchState.Unscratched,
                 )

@@ -58,14 +58,10 @@ fun ScratchScreen(
         state = ScreenState.Loading("Loading..."),
         snackbar = snackBar.value,
         topBar = {
-            Column(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                BaseAppBar(
-                    title = "Card Scratch",
-                    backButtonAction = onBackClick,
-                )
-            }
+            BaseAppBar(
+                title = "Card Scratch",
+                backButtonAction = onBackClick,
+            )
         },
         content = {
             Column(
