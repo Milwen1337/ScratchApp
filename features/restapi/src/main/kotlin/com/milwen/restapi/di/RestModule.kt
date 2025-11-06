@@ -44,7 +44,8 @@ val restModule = module {
     single<ActivationRepository> {
         ActivationRepositoryImpl(
             appScope = get<CoroutineScope>(),
-            scratchCardDao = get()
+            scratchCardDao = get(),
+            activationService = get(),
         )
     }
 }

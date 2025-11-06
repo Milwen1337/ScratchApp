@@ -1,4 +1,4 @@
-package com.milwen.scratch.business
+package com.milwen.scratch.data
 
 sealed class ScratchState {
     object Unscratched : ScratchState()

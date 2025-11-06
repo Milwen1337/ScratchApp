@@ -3,11 +3,11 @@ package com.milwen.scratch.presentation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,7 +18,6 @@ import com.milwen.baseline.presentation.BaseSnackbar
 import com.milwen.baseline.presentation.BaseSnackbarDuration
 import com.milwen.baseline.presentation.PrimaryButton
 import com.milwen.baseline.presentation.SnackbarType
-import com.milwen.baseline.presentation.show
 import com.milwen.scratch.business.ActivationViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -33,18 +32,18 @@ fun ActivationScreen(
     viewModel: ActivationViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
-    val snackBarHostState = remember { SnackbarHostState() }
+    val snackBar = remember { mutableStateOf<BaseSnackbar?>(null) }
 
-    LaunchedEffect(uiState.value) {
+    LaunchedEffect(uiState.value.screenState) {
         val state = uiState.value.screenState
         if (state is ScreenState.Error) {
-            snackBarHostState.show(
-                BaseSnackbar(
-                    message = state.message,
-                    type = SnackbarType.Default,
-                    duration = BaseSnackbarDuration.Short
-                )
+            snackBar.value = BaseSnackbar(
+                message = state.message,
+                type = SnackbarType.Default,
+                duration = BaseSnackbarDuration.Short
             )
+        } else {
+            snackBar.value = null
         }
     }
 
@@ -56,6 +55,7 @@ fun ActivationScreen(
 
     BaseScreen(
         state = uiState.value.screenState,
+        snackbar = snackBar.value,
         topBar = {
             Column(
                 modifier = Modifier.fillMaxWidth()

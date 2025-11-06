@@ -1,7 +1,7 @@
 package com.milwen.usecase.scratch
 
 import com.milwen.database.data.dao.ScratchCardDao
-import com.milwen.scratch.business.ScratchState
+import com.milwen.scratch.data.ScratchState
 import com.milwen.scratch.data.ScratchCard
 import com.milwen.scratch.domain.ScratchCardObserveUseCase
 import com.milwen.usecase.map.FeatureScratchMapper.toScratchCard

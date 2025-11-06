@@ -2,7 +2,7 @@ package com.milwen.usecase.map
 
 import com.milwen.database.data.entity.ScratchCardEntity
 import com.milwen.database.data.enum.ScratchCardEntityStatus
-import com.milwen.scratch.business.ScratchState
+import com.milwen.scratch.data.ScratchState
 import com.milwen.scratch.data.ScratchCard
 
 object FeatureScratchMapper {

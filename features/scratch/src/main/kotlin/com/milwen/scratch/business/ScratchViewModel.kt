@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.milwen.baseline.business.BaseViewModel
 import com.milwen.baseline.business.ScreenState
 import com.milwen.scratch.data.ScratchCard
+import com.milwen.scratch.data.ScratchState
 import com.milwen.scratch.domain.ScratchCardObserveUseCase
 import com.milwen.scratch.domain.ScratchUseCase
 import kotlinx.coroutines.launch

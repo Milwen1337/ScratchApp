@@ -25,7 +25,7 @@ import com.milwen.baseline.presentation.Orange
 import com.milwen.baseline.presentation.PrimaryButton
 import com.milwen.baseline.presentation.White
 import com.milwen.scratch.business.CardMainViewModel
-import com.milwen.scratch.business.ScratchState
+import com.milwen.scratch.data.ScratchState
 import org.koin.androidx.compose.koinViewModel
 
 @Immutable

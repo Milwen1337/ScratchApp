@@ -4,11 +4,14 @@ import androidx.lifecycle.viewModelScope
 import com.milwen.baseline.business.BaseViewModel
 import com.milwen.baseline.business.ScreenState
 import com.milwen.scratch.data.ScratchCard
+import com.milwen.scratch.data.ScratchState
 import com.milwen.scratch.domain.ActivationRepository
 import com.milwen.scratch.domain.ScratchCardObserveUseCase
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class ActivationViewModel(
+    private val appScope: CoroutineScope,
     private val activationRepository: ActivationRepository,
     private val scratchCardObserveUseCase: ScratchCardObserveUseCase,
 ): BaseViewModel<ActivationViewModel.State>(State()) {
@@ -24,22 +27,29 @@ class ActivationViewModel(
         }
     }
 
-    fun activateCard() = viewModelScope.launch {
+    fun activateCard() {
         val code = (state.scratchCard.status as? ScratchState.Scratched)?.revealCode
         if (code.isNullOrBlank()) {
             state = state.copy(screenState = ScreenState.Error("Please scratch the card first."))
-            return@launch
+            return
         }
 
         state = state.copy(screenState = ScreenState.Loading("Activating…"))
 
-        runCatching { activationRepository.activate(code) }
-            .onSuccess {
-                state = state.copy(screenState = null)
+        val job = appScope.launch {
+            runCatching { activationRepository.activate(code) }
+                .onFailure {}
+        }
+
+        viewModelScope.launch {
+            job.invokeOnCompletion { cause ->
+                state = if (cause == null) {
+                    state.copy(screenState = null)
+                } else {
+                    state.copy(screenState = ScreenState.Error(cause.message ?: "Activation failed"))
+                }
             }
-            .onFailure { e ->
-                state = state.copy(screenState = ScreenState.Error(e.message ?: "Activation failed"))
-            }
+        }
     }
 
     data class State(
