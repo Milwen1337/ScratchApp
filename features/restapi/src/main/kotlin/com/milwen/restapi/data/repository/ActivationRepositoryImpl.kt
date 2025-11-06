@@ -6,6 +6,7 @@ import com.milwen.database.data.enum.ScratchCardEntityStatus
 import com.milwen.restapi.data.service.ActivationService
 import com.milwen.scratch.domain.ActivationRepository
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -24,6 +25,7 @@ class ActivationRepositoryImpl(
             val validationCode = resp.body()?.android
                 ?: error("Missing validation code")
 
+            delay(5_000L)
             val entity = if (validationCode.isCodeValid()) {
                 ScratchCardEntity(
                     id = ScratchCardEntity.SINGLETON_ID,

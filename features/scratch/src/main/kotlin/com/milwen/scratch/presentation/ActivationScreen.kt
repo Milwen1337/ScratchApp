@@ -32,6 +32,13 @@ fun ActivationScreen(
     viewModel: ActivationViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
+
+    val listener = object : ActivationScreenListener {
+        override fun onActivate() {
+            viewModel.activateCard()
+        }
+    }
+
     val snackBar = remember { mutableStateOf<BaseSnackbar?>(null) }
 
     LaunchedEffect(uiState.value.screenState) {
@@ -44,12 +51,6 @@ fun ActivationScreen(
             )
         } else {
             snackBar.value = null
-        }
-    }
-
-    val listener = object : ActivationScreenListener {
-        override fun onActivate() {
-            viewModel.activateCard()
         }
     }
 

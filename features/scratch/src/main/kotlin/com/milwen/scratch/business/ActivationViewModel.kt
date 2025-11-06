@@ -22,7 +22,6 @@ class ActivationViewModel(
             scratchCardObserveUseCase().collect { card ->
                 Log.d("ActivationViewModel", "card: $card")
                 state = state.copy(
-                    screenState = null,
                     scratchCard = card,
                     canActivate = card.status is ScratchState.Scratched
                 )
@@ -33,11 +32,15 @@ class ActivationViewModel(
     fun activateCard() {
         val code = (state.scratchCard.status as? ScratchState.Scratched)?.revealCode
         if (code.isNullOrBlank()) {
-            state = state.copy(screenState = ScreenState.Error("Please scratch the card first."))
+            viewModelScope.launch {
+                state = state.copy(screenState = ScreenState.Error("Please scratch the card first."))
+            }
             return
         }
 
-        state = state.copy(screenState = ScreenState.Loading("Activating…"))
+        viewModelScope.launch {
+            state = state.copy(screenState = ScreenState.Loading("Activating…"))
+        }
 
         val job = appScope.launch {
             runCatching { activationRepository.activate(code) }
@@ -56,7 +59,7 @@ class ActivationViewModel(
     }
 
     data class State(
-        val screenState: ScreenState? = ScreenState.Loading("Loading"),
+        val screenState: ScreenState? = null,
         val scratchCard: ScratchCard = ScratchCard(ScratchState.Unscratched),
         val canActivate: Boolean = false,
     ) : BaseState
