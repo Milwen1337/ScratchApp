@@ -3,16 +3,11 @@ package com.milwen.restapi.data.repository
 import com.milwen.database.data.dao.ScratchCardDao
 import com.milwen.database.data.entity.ScratchCardEntity
 import com.milwen.database.data.enum.ScratchCardEntityStatus
-import com.milwen.restapi.data.map.FeatureScratchMapper.toScratchCard
 import com.milwen.restapi.data.service.ActivationService
-import com.milwen.scratch.business.ScratchState
-import com.milwen.scratch.data.ScratchCard
 import com.milwen.scratch.domain.ActivationRepository
 import com.milwen.scratch.restapi.BuildConfig
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,10 +37,6 @@ class ActivationRepositoryImpl(
             .build()
             .create(ActivationService::class.java)
     }
-
-    override fun observeScratchCard(): Flow<ScratchCard> =
-        scratchCardDao.observe()
-            .map { it?.toScratchCard() ?: ScratchCard(ScratchState.Unscratched) }
 
     override suspend fun activate(code: String) {
         appScope.launch {

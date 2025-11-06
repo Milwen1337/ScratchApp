@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "${Config.Android.NAMESPACE}.database"
+    namespace = "${Config.Android.NAMESPACE}.usecase"
     compileSdk = Config.Android.COMPILE_SDK
 
     defaultConfig {
@@ -26,14 +26,24 @@ android {
 
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
 }
 
 dependencies {
+    implementation(projects.features.database)
+    implementation(projects.features.scratch)
+
+    implementation(libs.kotlinx.coroutines.core)
+
+    implementation(libs.moshi.moshi)
+    ksp(libs.moshi.kotlin.codegen)
+
+    // Koin
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
 
-    // Room DB
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
 }

@@ -11,13 +11,11 @@ import androidx.compose.ui.Modifier
 import com.milwen.baseline.business.ScreenState
 import com.milwen.baseline.presentation.BaseAppBar
 import com.milwen.baseline.presentation.BaseScreen
-import com.milwen.scratch.business.ScratchState
 import com.milwen.scratch.business.ScratchViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ScratchScreen(
-    scratchState: ScratchState,
     onBackClick: () -> Unit,
     viewModel: ScratchViewModel = koinViewModel()
 ) {

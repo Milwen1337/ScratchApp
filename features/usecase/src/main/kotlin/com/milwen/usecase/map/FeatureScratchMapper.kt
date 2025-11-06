@@ -1,4 +1,4 @@
-package com.milwen.restapi.data.map
+package com.milwen.usecase.map
 
 import com.milwen.database.data.entity.ScratchCardEntity
 import com.milwen.database.data.enum.ScratchCardEntityStatus

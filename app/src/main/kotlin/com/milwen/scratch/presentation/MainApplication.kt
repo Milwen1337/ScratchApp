@@ -5,6 +5,7 @@ import com.milwen.database.di.databaseModule
 import com.milwen.restapi.di.restModule
 import com.milwen.scratch.di.mainModule
 import com.milwen.scratch.di.scratchModule
+import com.milwen.usecase.di.useCaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -20,6 +21,7 @@ class MainApplication : Application() {
                     restModule,
                     scratchModule,
                     databaseModule,
+                    useCaseModule,
                 )
             )
         }

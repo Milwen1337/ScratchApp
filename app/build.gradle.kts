@@ -64,6 +64,7 @@ dependencies {
     implementation(projects.features.restapi)
     implementation(projects.features.scratch)
     implementation(projects.features.database)
+    implementation(projects.features.usecase)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

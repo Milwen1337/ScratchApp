@@ -5,15 +5,17 @@ import com.milwen.baseline.business.BaseViewModel
 import com.milwen.baseline.business.ScreenState
 import com.milwen.scratch.data.ScratchCard
 import com.milwen.scratch.domain.ActivationRepository
+import com.milwen.scratch.domain.ScratchCardObserveUseCase
 import kotlinx.coroutines.launch
 
 class ActivationViewModel(
-    val activationRepository: ActivationRepository
+    private val activationRepository: ActivationRepository,
+    private val scratchCardObserveUseCase: ScratchCardObserveUseCase,
 ): BaseViewModel<ActivationViewModel.State>(State()) {
 
     init {
         viewModelScope.launch {
-            activationRepository.observeScratchCard().collect { card ->
+            scratchCardObserveUseCase().collect { card ->
                 state = state.copy(
                     scratchCard = card,
                     canActivate = card.status is ScratchState.Scratched
