@@ -44,10 +44,10 @@ fun CardMainScreen(
 
     val listener = object : CardMainScreenListener {
         override fun onScratch() {
-            onActivationClick.invoke()
+            onScratchClick.invoke()
         }
         override fun onActivate() {
-            onScratchClick.invoke()
+            onActivationClick.invoke()
         }
     }
 

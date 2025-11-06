@@ -1,5 +1,6 @@
 package com.milwen.scratch.business
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.milwen.baseline.business.BaseViewModel
 import com.milwen.baseline.business.ScreenState
@@ -19,6 +20,7 @@ class ActivationViewModel(
     init {
         viewModelScope.launch {
             scratchCardObserveUseCase().collect { card ->
+                Log.d("ActivationViewModel", "card: $card")
                 state = state.copy(
                     screenState = null,
                     scratchCard = card,

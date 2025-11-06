@@ -55,7 +55,7 @@ fun ScratchScreen(
     }
 
     BaseScreen(
-        state = ScreenState.Loading("Loading..."),
+        state = uiState.value.screenState,
         snackbar = snackBar.value,
         topBar = {
             BaseAppBar(

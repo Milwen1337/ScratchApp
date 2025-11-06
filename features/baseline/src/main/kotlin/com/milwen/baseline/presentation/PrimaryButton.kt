@@ -1,5 +1,6 @@
 package com.milwen.baseline.presentation
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -17,7 +18,7 @@ fun PrimaryButton(
     Button(
         enabled = isEnabled,
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
             containerColor = BeyondBlue,
             contentColor = White,
