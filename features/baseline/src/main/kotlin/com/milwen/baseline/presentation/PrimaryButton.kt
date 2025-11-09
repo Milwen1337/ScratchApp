@@ -10,15 +10,15 @@ import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
 fun PrimaryButton(
+    modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Button(
+        modifier = modifier.fillMaxWidth(),
         enabled = isEnabled,
         onClick = onClick,
-        modifier = modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
             containerColor = BeyondBlue,
             contentColor = White,
