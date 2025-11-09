@@ -56,7 +56,10 @@ dependencies {
     implementation(libs.koin.androidx.compose)
 
     // Test
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(platform(libs.koin.bom))
+    testImplementation(libs.bundles.test.unit)
+    testImplementation(libs.androidx.room.testing)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.bundles.test.android)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
